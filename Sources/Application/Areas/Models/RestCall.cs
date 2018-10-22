@@ -15,8 +15,9 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models
                 var fullUrl = BaseUri.ToString();
                 var baseUriEndsWithSlash = BaseUri.AbsolutePath.EndsWith("/", StringComparison.OrdinalIgnoreCase);
                 var resourcePathStartsWithSlash = actualResourcePath.StartsWith("/", StringComparison.OrdinalIgnoreCase);
+                var addTralingSlash = !baseUriEndsWithSlash && !resourcePathStartsWithSlash && !string.IsNullOrEmpty(actualResourcePath);
 
-                if (!baseUriEndsWithSlash && !resourcePathStartsWithSlash)
+                if (addTralingSlash)
                 {
                     fullUrl += "/";
                 }
