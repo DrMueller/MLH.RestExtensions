@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Mmu.Mlh.LanguageExtensions.Areas.Invariance;
 using Mmu.Mlh.RestExtensions.Areas.Models;
@@ -13,15 +12,18 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Implementation
     [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Instantiated by StructureMap")]
     internal class RestProxy : IRestProxy
     {
+        private readonly IHttpClientProxyFactory _httpClientProxyFactory;
         private readonly IHttpRequestFactory _httpRequestFactory;
         private readonly IRestCallBuilderFactory _restCallBuilderFactory;
 
         public RestProxy(
             IHttpRequestFactory httpRequestFactory,
-            IRestCallBuilderFactory restCallBuilderFactory)
+            IRestCallBuilderFactory restCallBuilderFactory,
+            IHttpClientProxyFactory httpClientProxyFactory)
         {
             _httpRequestFactory = httpRequestFactory;
             _restCallBuilderFactory = restCallBuilderFactory;
+            _httpClientProxyFactory = httpClientProxyFactory;
         }
 
         public async Task<T> PerformCallAsync<T>(RestCall restCall)
@@ -30,19 +32,16 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Implementation
 
             var request = _httpRequestFactory.Create(restCall);
 
-            using (var httpClient = new HttpClient())
+            using (var httpClientProxy = _httpClientProxyFactory.Create())
             {
-                using (var response = await httpClient.SendAsync(request))
+                var response = await httpClientProxy.SendAsync(request);
+                if (response.IsSuccessStatusCode)
                 {
-                    var responseBody = await response.Content.ReadAsStringAsync();
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return ParseResultContent<T>(responseBody);
-                    }
-
-                    var exceptionMessage = $"Could not get data from {request.RequestUri}. Response: {responseBody}";
-                    throw new Exception(exceptionMessage);
+                    return ParseResultContent<T>(response.ResponseBody);
                 }
+
+                var exceptionMessage = $"Could not get data from {restCall.AbsoluteUri}. Response: {response.ResponseBody}";
+                throw new RestCallException(exceptionMessage);
             }
         }
 

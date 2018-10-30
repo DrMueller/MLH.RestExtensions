@@ -12,6 +12,37 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models
     public class RestCallUnitTests
     {
         [Test]
+        public void Constructor_WithQueryParameters_AddsQueryParametersToFullUri()
+        {
+            const string UriString = "https://www.google.ch";
+            var baseUri = new Uri(UriString);
+
+            const RestCallMethodType MethodType = RestCallMethodType.Get;
+            var security = RestSecurity.CreateAnonymous();
+            var headers = new RestHeaders(new List<RestHeader>());
+            var body = Maybe.CreateSome(new RestCallBody(new object()));
+
+            var queryParameterList = new List<QueryParameter>
+            {
+                new QueryParameter("Key1", "Value1", "Value2"),
+                new QueryParameter("Key2", "Value3")
+            };
+
+            const string ExpectedUriString = UriString + "?Key1=Value1&Key1=Value2&Key2=Value3";
+            var expectedFullUri = new Uri(ExpectedUriString);
+
+            var queryParameters = new QueryParameters(queryParameterList);
+
+            ConstructorTestBuilderFactory.Constructing<RestCall>()
+                .UsingDefaultConstructor()
+                .WithArgumentValues(baseUri, Maybe.CreateNone<string>(), MethodType, security, headers, body, queryParameters)
+                .Maps()
+                .ToProperty(f => f.AbsoluteUri).WithValue(expectedFullUri)
+                .BuildMaps()
+                .Assert();
+        }
+
+        [Test]
         public void Constructor_Works()
         {
             var baseUri = new Uri("https://www.google.ch");
@@ -23,10 +54,11 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models
             var headers = new RestHeaders(new List<RestHeader>());
             var body = Maybe.CreateSome(new RestCallBody(new object()));
             var expectedFullUri = new Uri(baseUri, "/" + ActualResourcePathString);
+            var queryParameters = new QueryParameters(new List<QueryParameter>());
 
             ConstructorTestBuilderFactory.Constructing<RestCall>()
                 .UsingDefaultConstructor()
-                .WithArgumentValues(baseUri, resourcePath, MethodType, security, headers, body)
+                .WithArgumentValues(baseUri, resourcePath, MethodType, security, headers, body, queryParameters)
                 .Maps()
                 .ToProperty(f => f.BaseUri).WithValue(baseUri)
                 .ToProperty(f => f.Body).WithValue(body)

@@ -12,6 +12,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding.Implementation
         private readonly List<RestHeader> _headers = new List<RestHeader>();
         private readonly RestCallMethodType _methodType;
         private Maybe<RestCallBody> _body = Maybe.CreateNone<RestCallBody>();
+        private List<QueryParameter> _queryParameters = new List<QueryParameter>();
         private Maybe<string> _resourcePath = Maybe.CreateNone<string>();
         private RestSecurity _restSecurity = RestSecurity.CreateAnonymous();
 
@@ -29,7 +30,8 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding.Implementation
                 _methodType,
                 _restSecurity,
                 new RestHeaders(_headers),
-                _body);
+                _body,
+                new QueryParameters(_queryParameters));
         }
 
         public IRestCallBuilder WithBody(RestCallBody body)
@@ -41,6 +43,13 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding.Implementation
         public IRestHeadersBuilder WithHeaders()
         {
             return new RestHeadersBuilder(this, _headers);
+        }
+
+        public IRestCallBuilder WithQueryParameter(string key, params string[] values)
+        {
+            _queryParameters.Add(new QueryParameter(key, values));
+
+            return this;
         }
 
         public IRestCallBuilder WithResourcePath(string resourcePath)
