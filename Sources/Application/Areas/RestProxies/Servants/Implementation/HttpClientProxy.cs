@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Mmu.Mlh.RestExtensions.Areas.Models;
+using Mmu.Mlh.RestExtensions.Infrastructure.Exceptions;
 
 namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation
 {

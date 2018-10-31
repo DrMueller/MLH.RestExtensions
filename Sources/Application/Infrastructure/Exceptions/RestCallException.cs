@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Mmu.Mlh.RestExtensions.Areas.Models
+namespace Mmu.Mlh.RestExtensions.Infrastructure.Exceptions
 {
     [Serializable]
     public class RestCallException : Exception
