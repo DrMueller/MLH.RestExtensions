@@ -5,6 +5,7 @@
         None = 0,
         Get,
         Post,
-        Patch
+        Patch,
+        Delete
     }
 }
