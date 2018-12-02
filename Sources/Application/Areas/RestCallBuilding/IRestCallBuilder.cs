@@ -11,6 +11,8 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding
 
         IRestHeadersBuilder WithHeaders();
 
+        IRestCallBuilder WithQueryParameter(string key, params object[] values);
+
         IRestCallBuilder WithResourcePath(string resourcePath);
 
         IRestCallBuilder WithSecurity(RestSecurity security);

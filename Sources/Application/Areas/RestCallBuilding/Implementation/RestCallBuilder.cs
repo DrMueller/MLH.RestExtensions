@@ -45,7 +45,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding.Implementation
             return new RestHeadersBuilder(this, _headers);
         }
 
-        public IRestCallBuilder WithQueryParameter(string key, params string[] values)
+        public IRestCallBuilder WithQueryParameter(string key, params object[] values)
         {
             _queryParameters.Add(new QueryParameter(key, values));
 
