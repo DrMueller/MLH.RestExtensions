@@ -20,7 +20,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models
             const RestCallMethodType MethodType = RestCallMethodType.Get;
             var security = RestSecurity.CreateAnonymous();
             var headers = new RestHeaders(new List<RestHeader>());
-            var body = Maybe.CreateSome(new RestCallBody(new object()));
+            var body = Maybe.CreateSome(RestCallBody.CreateApplicationJson(new object()));
 
             var queryParameterList = new List<QueryParameter>
             {
@@ -52,7 +52,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models
             const RestCallMethodType MethodType = RestCallMethodType.Get;
             var security = RestSecurity.CreateAnonymous();
             var headers = new RestHeaders(new List<RestHeader>());
-            var body = Maybe.CreateSome(new RestCallBody(new object()));
+            var body = Maybe.CreateSome(RestCallBody.CreateApplicationJson(new object()));
             var expectedFullUri = new Uri(baseUri, "/" + ActualResourcePathString);
             var queryParameters = new QueryParameters(new List<QueryParameter>());
 

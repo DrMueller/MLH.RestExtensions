@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using Mmu.Mlh.LanguageExtensions.Areas.Collections;
 using Mmu.Mlh.LanguageExtensions.Areas.Types.Maybes;
 using Mmu.Mlh.RestExtensions.Areas.Models;
-using Newtonsoft.Json;
 
 namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation
 {
@@ -26,9 +24,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation
             body.Evaluate(
                 bodyObj =>
                 {
-                    var jsonBody = JsonConvert.SerializeObject(bodyObj.Payload);
-                    httpRequestMessage.Content = new StringContent(jsonBody);
-                    httpRequestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(bodyObj.MediaType);
+                    httpRequestMessage.Content = bodyObj.CreateHttpContent();
                 });
         }
 

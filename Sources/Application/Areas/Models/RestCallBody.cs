@@ -1,19 +1,39 @@
-﻿using Mmu.Mlh.LanguageExtensions.Areas.Invariance;
+﻿using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Mmu.Mlh.LanguageExtensions.Areas.Invariance;
+using Mmu.Mlh.RestExtensions.Areas.Models.RestCallBodies;
 
 namespace Mmu.Mlh.RestExtensions.Areas.Models
 {
-    public class RestCallBody
+    public abstract class RestCallBody
     {
-        public string MediaType { get; }
+        public abstract string MediaType { get; }
         public object Payload { get; }
 
-        public RestCallBody(object payload, string mediaType = "application/json")
+        protected RestCallBody(object payload)
         {
             Guard.ObjectNotNull(() => payload);
-            Guard.StringNotNullOrEmpty(() => mediaType);
-
             Payload = payload;
-            MediaType = mediaType;
         }
+
+        public static RestCallBody CreateApplicationJson(object payload)
+        {
+            return new ApplicationJsonRestCallBody(payload);
+        }
+
+        public static RestCallBody CreateApplicationWwwFormUrlEncoded(IDictionary<string, string> keyValuePairs)
+        {
+            return new ApplicationWwwFormUrlEncodedBody(keyValuePairs);
+        }
+
+        internal HttpContent CreateHttpContent()
+        {
+            var httpContent = CreateWHttpContentWithPayload();
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue(MediaType);
+            return httpContent;
+        }
+
+        protected abstract HttpContent CreateWHttpContentWithPayload();
     }
 }

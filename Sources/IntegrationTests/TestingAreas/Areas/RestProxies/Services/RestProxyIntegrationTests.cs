@@ -38,7 +38,7 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
         }
 
         [Test]
-        public void PerformingCall_WithNotExistingUrl_ThrowsRstCallException()
+        public void PerformingCall_WithNotExistingUrl_ThrowsRestCallException()
         {
             // Arrange
             var restCall = DataGenerator.CreateNotExistingUrlRestCall();
