@@ -2,9 +2,9 @@
 
 namespace Mmu.Mlh.RestExtensions.Areas.Models.Security.SecurityTypes
 {
-    public class Anonymouss : RestSecurity
+    public class Anonymous : RestSecurity
     {
-        internal Anonymouss()
+        internal Anonymous()
         {
         }
 

@@ -13,7 +13,16 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models.RestCallBodies
 
         protected override HttpContent CreateWHttpContentWithPayload()
         {
-            var jsonBody = JsonConvert.SerializeObject(Payload);
+            string jsonBody;
+            if (Payload is string s)
+            {
+                jsonBody = s;
+            }
+            else
+            {
+                jsonBody = JsonConvert.SerializeObject(Payload);
+            }
+
             var result = new StringContent(jsonBody);
             return result;
         }

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Mmu.Mlh.RestExtensions.Areas.Models;
 using Mmu.Mlh.RestExtensions.Areas.RestProxies;
 using Mmu.Mlh.RestExtensions.Infrastructure.Exceptions;
 using Mmu.Mlh.RestExtensions.IntegrationTests.TestingInfrastructure.Models;
 using Mmu.Mlh.TestingExtensions.Areas.Common.BasesClasses;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies.Services
@@ -25,7 +25,7 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
         public async Task PerformingCall_WithCorrectUrl_FetchesData()
         {
             // Arrange
-            var restCall = DataGenerator.CreateOneTodoRestCall();
+            var restCall = DataGenerator.CreateGetOneTodoRestCall();
 
             // Act
             var actualResponse = await _sut.PerformCallAsync<Todo>(restCall);
@@ -59,6 +59,56 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
             // Assert
             Assert.AreEqual(5, actualResponse.Count);
             Assert.IsTrue(actualResponse.All(f => f.PostId == 1));
+        }
+
+        [Test]
+        public async Task PerformingPost_WithApplicationJsonFromJsonString_SendsAsJson()
+        {
+            // Arrange
+            var todo = new Todo
+            {
+                Completed = true,
+                Title = "Hello Test",
+                UserId = 123
+            };
+
+            var jsonString = JsonConvert.SerializeObject(todo);
+
+            var restCall = DataGenerator.CreatePostOneTodoRestCall(jsonString);
+
+            // Act
+            var actualResponse = await _sut.PerformCallAsync<Todo>(restCall);
+
+            // Assert
+            Assert.IsNotNull(actualResponse);
+            Assert.IsTrue(actualResponse.Id > 0);
+            Assert.AreEqual(todo.Completed, actualResponse.Completed);
+            Assert.AreEqual(todo.Title, actualResponse.Title);
+            Assert.AreEqual(todo.UserId, actualResponse.UserId);
+        }
+
+        [Test]
+        public async Task PerformingPost_WithApplicationJsonFromObject_ConvertsAndSendsAsJson()
+        {
+            // Arrange
+            var todo = new Todo
+            {
+                Completed = true,
+                Title = "Hello Test",
+                UserId = 123
+            };
+
+            var restCall = DataGenerator.CreatePostOneTodoRestCall(todo);
+
+            // Act
+            var actualResponse = await _sut.PerformCallAsync<Todo>(restCall);
+
+            // Assert
+            Assert.IsNotNull(actualResponse);
+            Assert.IsTrue(actualResponse.Id > 0);
+            Assert.AreEqual(todo.Completed, actualResponse.Completed);
+            Assert.AreEqual(todo.Title, actualResponse.Title);
+            Assert.AreEqual(todo.UserId, actualResponse.UserId);
         }
     }
 }

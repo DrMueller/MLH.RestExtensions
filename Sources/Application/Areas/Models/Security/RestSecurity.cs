@@ -7,7 +7,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models.Security
     {
         public static RestSecurity CreateAnonymous()
         {
-            return new Anonymouss();
+            return new Anonymous();
         }
 
         public static RestSecurity CreateBasicAuthentication(string userName, string password)
