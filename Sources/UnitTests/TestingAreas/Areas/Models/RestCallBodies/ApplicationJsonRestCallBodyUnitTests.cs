@@ -16,7 +16,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models.RestCallBod
         {
             var obj = new object();
 
-            ConstructorTestBuilderFactory.Constructing<ApplicationJsonRestCallBody>()
+            ConstructorTestBuilderFactory.Constructing<ApplicationJsonBody>()
                 .UsingDefaultConstructor()
                 .WithArgumentValues(null)
                 .Fails()
@@ -35,7 +35,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models.RestCallBod
             var individualJson = JsonConvert.SerializeObject(individual);
 
             // Act
-            var body = new ApplicationJsonRestCallBody(individualJson);
+            var body = new ApplicationJsonBody(individualJson);
             var actualContent = body.CreateHttpContent();
 
             // Assert
@@ -53,7 +53,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models.RestCallBod
             var expectedJson = JsonConvert.SerializeObject(individual);
 
             // Act
-            var body = new ApplicationJsonRestCallBody(individual);
+            var body = new ApplicationJsonBody(individual);
             var actualContent = body.CreateHttpContent();
 
             // Assert

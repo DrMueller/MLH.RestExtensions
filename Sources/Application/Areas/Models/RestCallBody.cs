@@ -19,7 +19,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models
 
         public static RestCallBody CreateApplicationJson(object payload)
         {
-            return new ApplicationJsonRestCallBody(payload);
+            return new ApplicationJsonBody(payload);
         }
 
         public static RestCallBody CreateApplicationWwwFormUrlEncoded(IDictionary<string, string> keyValuePairs)
