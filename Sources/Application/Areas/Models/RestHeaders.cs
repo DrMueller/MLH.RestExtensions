@@ -7,7 +7,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models
     {
         public IReadOnlyCollection<RestHeader> Entries { get; }
 
-        public RestHeaders(IReadOnlyCollection<RestHeader> entries)
+        internal RestHeaders(IReadOnlyCollection<RestHeader> entries)
         {
             Entries = entries;
             Guard.ObjectNotNull(() => entries);

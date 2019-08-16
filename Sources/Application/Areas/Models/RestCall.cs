@@ -39,7 +39,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models
         public Maybe<string> ResourcePath { get; }
         public RestSecurity Security { get; }
 
-        public RestCall(Uri baseUri, Maybe<string> resourcePath, RestCallMethodType methodType, RestSecurity security, RestHeaders headers, Maybe<RestCallBody> body, QueryParameters queryParameters)
+        internal RestCall(Uri baseUri, Maybe<string> resourcePath, RestCallMethodType methodType, RestSecurity security, RestHeaders headers, Maybe<RestCallBody> body, QueryParameters queryParameters)
         {
             Guard.ObjectNotNull(() => baseUri);
             Guard.ObjectNotNull(() => security);

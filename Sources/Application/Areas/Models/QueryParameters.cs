@@ -10,7 +10,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models
     {
         private readonly IReadOnlyCollection<QueryParameter> _entries;
 
-        public QueryParameters(IReadOnlyCollection<QueryParameter> entries)
+        internal QueryParameters(IReadOnlyCollection<QueryParameter> entries)
         {
             Guard.ObjectNotNull(() => entries);
 

@@ -10,7 +10,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models.RestCallBodies
         private readonly IDictionary<string, string> _keyValuePairs;
         public override string MediaType { get; } = "application/x-www-form-urlencoded";
 
-        public ApplicationWwwFormUrlEncodedBody(IDictionary<string, string> keyValuePairs) : base(keyValuePairs)
+        internal ApplicationWwwFormUrlEncodedBody(IDictionary<string, string> keyValuePairs) : base(keyValuePairs)
         {
             _keyValuePairs = keyValuePairs;
         }

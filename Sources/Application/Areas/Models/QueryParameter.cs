@@ -11,7 +11,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models
         private readonly string _key;
         private readonly IReadOnlyCollection<string> _values;
 
-        public QueryParameter(string key, params object[] values)
+        internal QueryParameter(string key, params object[] values)
         {
             Guard.StringNotNullOrEmpty(() => key);
             Guard.ObjectNotNull(() => values);

@@ -7,7 +7,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models
         public string Name { get; }
         public string Value { get; }
 
-        public RestHeader(string name, string value)
+        internal RestHeader(string name, string value)
         {
             Guard.StringNotNullOrEmpty(() => name);
             Guard.StringNotNullOrEmpty(() => value);

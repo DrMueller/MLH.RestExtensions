@@ -5,7 +5,7 @@
         public bool IsSuccessStatusCode { get; }
         public string ResponseBody { get; }
 
-        public HttpResponse(bool isSuccessStatusCode, string responseBody)
+        internal HttpResponse(bool isSuccessStatusCode, string responseBody)
         {
             IsSuccessStatusCode = isSuccessStatusCode;
             ResponseBody = responseBody;
