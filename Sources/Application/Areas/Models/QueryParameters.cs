@@ -17,7 +17,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models
             _entries = entries;
         }
 
-        internal void AppendQueryParameters(StringBuilder urlBuilder)
+        public void AppendQueryParameters(StringBuilder urlBuilder)
         {
             if (!_entries.Any())
             {

@@ -1,5 +1,6 @@
 ﻿using Mmu.Mlh.RestExtensions.Areas.Models;
 using Mmu.Mlh.RestExtensions.Areas.Models.Security;
+using Mmu.Mlh.RestExtensions.Areas.QueryParamBuilding;
 
 namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding
 {
@@ -11,7 +12,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding
 
         IRestHeadersBuilder WithHeaders();
 
-        IQueryParameterBuilder WithQueryParameters();
+        IRestQueryParameterBuilder WithQueryParameters();
 
         IRestCallBuilder WithResourcePath(string resourcePath);
 

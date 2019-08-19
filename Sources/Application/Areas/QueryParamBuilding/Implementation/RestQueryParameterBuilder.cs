@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using Mmu.Mlh.RestExtensions.Areas.Models;
+using Mmu.Mlh.RestExtensions.Areas.RestCallBuilding;
 
-namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding.Implementation
+namespace Mmu.Mlh.RestExtensions.Areas.QueryParamBuilding.Implementation
 {
-    internal class QueryParameterBuilder : IQueryParameterBuilder
+    internal class RestQueryParameterBuilder : IRestQueryParameterBuilder
     {
         private readonly List<QueryParameter> _queryParameters = new List<QueryParameter>();
         private readonly IRestCallBuilder _restCallBuilder;
 
-        public QueryParameterBuilder(IRestCallBuilder restCallBuilder)
+        public RestQueryParameterBuilder(IRestCallBuilder restCallBuilder)
         {
             _restCallBuilder = restCallBuilder;
         }
@@ -18,12 +19,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding.Implementation
             return _restCallBuilder;
         }
 
-        public QueryParameters FinishBuilding()
-        {
-            return new QueryParameters(_queryParameters);
-        }
-
-        public IQueryParameterBuilder WithQueryParameter(string key, params object[] values)
+        public IRestQueryParameterBuilder WithQueryParameter(string key, params object[] values)
         {
             _queryParameters.Add(new QueryParameter(key, values));
             return this;

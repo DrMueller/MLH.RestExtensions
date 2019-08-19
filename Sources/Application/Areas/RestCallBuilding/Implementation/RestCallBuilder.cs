@@ -4,6 +4,8 @@ using System.Linq;
 using Mmu.Mlh.LanguageExtensions.Areas.Types.Maybes;
 using Mmu.Mlh.RestExtensions.Areas.Models;
 using Mmu.Mlh.RestExtensions.Areas.Models.Security;
+using Mmu.Mlh.RestExtensions.Areas.QueryParamBuilding;
+using Mmu.Mlh.RestExtensions.Areas.QueryParamBuilding.Implementation;
 
 namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding.Implementation
 {
@@ -11,7 +13,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding.Implementation
     {
         private readonly Uri _basePath;
         private readonly RestCallMethodType _methodType;
-        private readonly List<QueryParameterBuilder> _queryParamBuilders = new List<QueryParameterBuilder>();
+        private readonly List<RestQueryParameterBuilder> _queryParamBuilders = new List<RestQueryParameterBuilder>();
         private readonly List<RestHeadersBuilder> _restHeaderBuilders = new List<RestHeadersBuilder>();
         private Maybe<RestCallBody> _body = Maybe.CreateNone<RestCallBody>();
         private Maybe<string> _resourcePath = Maybe.CreateNone<string>();
@@ -48,9 +50,9 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding.Implementation
             return restHeaderBuilder;
         }
 
-        public IQueryParameterBuilder WithQueryParameters()
+        public IRestQueryParameterBuilder WithQueryParameters()
         {
-            var queryParamBuilder = new QueryParameterBuilder(this);
+            var queryParamBuilder = new RestQueryParameterBuilder(this);
             _queryParamBuilders.Add(queryParamBuilder);
             return queryParamBuilder;
         }

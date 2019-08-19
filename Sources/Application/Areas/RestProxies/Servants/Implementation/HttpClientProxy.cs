@@ -8,8 +8,8 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation
 {
     internal sealed class HttpClientProxy : IHttpClientProxy
     {
+        private readonly HttpClient _httpClient;
         private bool _disposed;
-        private HttpClient _httpClient;
 
         public HttpClientProxy()
         {
@@ -29,17 +29,18 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation
             try
             {
                 httpResponseMessage = await _httpClient.SendAsync(request);
+                var responseBody = await httpResponseMessage.Content.ReadAsStringAsync();
+                var result = new HttpResponse(httpResponseMessage.IsSuccessStatusCode, responseBody);
+                return result;
             }
             catch (HttpRequestException httpRequestException)
             {
                 throw new RestCallException(httpRequestException.Message);
             }
-
-            var responseBody = await httpResponseMessage.Content.ReadAsStringAsync();
-            var result = new HttpResponse(httpResponseMessage.IsSuccessStatusCode, responseBody);
-
-            httpResponseMessage.Dispose();
-            return result;
+            finally
+            {
+                httpResponseMessage?.Dispose();
+            }
         }
 
         private void Dispose(bool disposing)
