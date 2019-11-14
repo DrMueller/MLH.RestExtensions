@@ -2,10 +2,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Mmu.Mlh.LanguageExtensions.Areas.Invariance;
+using Mmu.Mlh.RestExtensions.Areas.Exceptions;
 using Mmu.Mlh.RestExtensions.Areas.Models;
 using Mmu.Mlh.RestExtensions.Areas.RestCallBuilding;
 using Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants;
-using Mmu.Mlh.RestExtensions.Infrastructure.Exceptions;
 using Newtonsoft.Json;
 
 namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Implementation

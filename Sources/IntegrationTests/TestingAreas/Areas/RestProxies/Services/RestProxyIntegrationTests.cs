@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Mmu.Mlh.RestExtensions.Areas.Exceptions;
 using Mmu.Mlh.RestExtensions.Areas.RestProxies;
-using Mmu.Mlh.RestExtensions.Infrastructure.Exceptions;
 using Mmu.Mlh.RestExtensions.IntegrationTests.TestingInfrastructure.Models;
 using Mmu.Mlh.TestingExtensions.Areas.Common.BasesClasses;
 using Newtonsoft.Json;
