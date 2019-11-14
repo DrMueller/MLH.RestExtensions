@@ -2,8 +2,7 @@
 {
     public interface IRestHeadersBuilder
     {
-        IRestHeadersBuilder WithHeader(string name, string value);
-
         IRestCallBuilder BuildHeaders();
+        IRestHeadersBuilder WithHeader(string name, string value);
     }
 }

@@ -13,15 +13,15 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestCallBuilding.Implementation
             _restCallBuilder = restCallBuilder;
         }
 
+        public IRestCallBuilder BuildHeaders()
+        {
+            return _restCallBuilder;
+        }
+
         public IRestHeadersBuilder WithHeader(string name, string value)
         {
             _headers.Add(new RestHeader(name, value));
             return this;
-        }
-
-        public IRestCallBuilder BuildHeaders()
-        {
-            return _restCallBuilder;
         }
 
         internal IReadOnlyCollection<RestHeader> Build()

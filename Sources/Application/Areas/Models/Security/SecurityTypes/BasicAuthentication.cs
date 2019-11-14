@@ -13,8 +13,8 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models.Security.SecurityTypes
 
         internal BasicAuthentication(string userName, string password)
         {
-            Guard.ObjectNotNull(() => userName);
-            Guard.ObjectNotNull(() => password);
+            Guard.StringNotNullOrEmpty(() => userName);
+            Guard.StringNotNullOrEmpty(() => password);
 
             _userName = userName;
             _password = password;

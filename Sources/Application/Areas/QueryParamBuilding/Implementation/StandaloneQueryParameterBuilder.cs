@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Mmu.Mlh.RestExtensions.Areas.Models;
-using Mmu.Mlh.RestExtensions.Areas.RestCallBuilding;
 
 namespace Mmu.Mlh.RestExtensions.Areas.QueryParamBuilding.Implementation
 {

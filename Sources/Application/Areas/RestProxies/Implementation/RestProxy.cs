@@ -62,7 +62,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Implementation
 
             if (string.IsNullOrEmpty(content) || content == "[]")
             {
-                return default(T);
+                return default;
             }
 
             var result = JsonConvert.DeserializeObject<T>(content);

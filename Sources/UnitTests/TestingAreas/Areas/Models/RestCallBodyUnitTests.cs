@@ -51,11 +51,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models
         public async Task CreatingHttpContent_CreatesContentValueFromSubClass()
         {
             // Arrange
-            var dict = new Dictionary<string, string>
-            {
-                { "Key1", "Value1" },
-                { "Key2", "Value2" }
-            };
+            var dict = new Dictionary<string, string> { { "Key1", "Value1" }, { "Key2", "Value2" } };
 
             const string ExpectedContentValue = "Key1=Value1&Key2=Value2";
             var actualBody = RestCallBody.CreateApplicationWwwFormUrlEncoded(dict);

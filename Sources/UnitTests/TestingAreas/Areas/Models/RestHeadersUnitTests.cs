@@ -11,12 +11,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models
         [Test]
         public void Constructor_Works()
         {
-            var entries = new List<RestHeader>
-            {
-                new RestHeader("Name1", "Value1"),
-                new RestHeader("Name2", "Value2"),
-                new RestHeader("Name3", "Value3")
-            };
+            var entries = new List<RestHeader> { new RestHeader("Name1", "Value1"), new RestHeader("Name2", "Value2"), new RestHeader("Name3", "Value3") };
 
             ConstructorTestBuilderFactory.Constructing<RestHeaders>()
                 .UsingDefaultConstructor()

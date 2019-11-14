@@ -13,12 +13,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models.RestCallBod
         [Test]
         public void Constructor_Works()
         {
-            var dict = new Dictionary<string, string>
-            {
-                { "Key1", "Value1" },
-                { "Key2", "Value2" },
-                { "Key3", "Value3" }
-            };
+            var dict = new Dictionary<string, string> { { "Key1", "Value1" }, { "Key2", "Value2" }, { "Key3", "Value3" } };
 
             ConstructorTestBuilderFactory.Constructing<ApplicationWwwFormUrlEncodedBody>()
                 .UsingDefaultConstructor()
@@ -35,12 +30,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models.RestCallBod
         public async Task CreatingHttpContent_MapsDictionaryToString()
         {
             // Arrange
-            var dict = new Dictionary<string, string>
-            {
-                { "Key1", "Value1" },
-                { "Key2", "Value2" },
-                { "Key3", "Value3" }
-            };
+            var dict = new Dictionary<string, string> { { "Key1", "Value1" }, { "Key2", "Value2" }, { "Key3", "Value3" } };
 
             const string ExpectedStr = "Key1=Value1&Key2=Value2&Key3=Value3";
 

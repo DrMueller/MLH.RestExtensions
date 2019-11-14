@@ -13,13 +13,13 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
     [TestFixture]
     public class RestProxyIntegrationTests : TestingBaseWithContainer
     {
-        private IRestProxy _sut;
-
         [SetUp]
         public void Align()
         {
             _sut = ServiceLocator.GetService<IRestProxy>();
         }
+
+        private IRestProxy _sut;
 
         [Test]
         public async Task PerformingCall_WithCorrectUrl_FetchesData()
@@ -65,12 +65,7 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
         public async Task PerformingPost_WithApplicationJsonFromJsonString_SendsAsJson()
         {
             // Arrange
-            var todo = new Todo
-            {
-                Completed = true,
-                Title = "Hello Test",
-                UserId = 123
-            };
+            var todo = new Todo { Completed = true, Title = "Hello Test", UserId = 123 };
 
             var jsonString = JsonConvert.SerializeObject(todo);
 
@@ -91,12 +86,7 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
         public async Task PerformingPost_WithApplicationJsonFromObject_ConvertsAndSendsAsJson()
         {
             // Arrange
-            var todo = new Todo
-            {
-                Completed = true,
-                Title = "Hello Test",
-                UserId = 123
-            };
+            var todo = new Todo { Completed = true, Title = "Hello Test", UserId = 123 };
 
             var restCall = DataGenerator.CreatePostOneTodoRestCall(todo);
 

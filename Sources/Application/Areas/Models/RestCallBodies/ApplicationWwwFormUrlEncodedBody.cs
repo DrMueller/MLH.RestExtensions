@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Text;
 using System.Web;
+using Mmu.Mlh.LanguageExtensions.Areas.Invariance;
 
 namespace Mmu.Mlh.RestExtensions.Areas.Models.RestCallBodies
 {
@@ -12,6 +13,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models.RestCallBodies
 
         internal ApplicationWwwFormUrlEncodedBody(IDictionary<string, string> keyValuePairs) : base(keyValuePairs)
         {
+            Guard.ObjectNotNull(() => keyValuePairs);
             _keyValuePairs = keyValuePairs;
         }
 

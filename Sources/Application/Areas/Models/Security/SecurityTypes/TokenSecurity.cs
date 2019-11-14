@@ -9,7 +9,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.Models.Security.SecurityTypes
 
         internal TokenSecurity(string encodedToken)
         {
-            Guard.ObjectNotNull(() => encodedToken);
+            Guard.StringNotNullOrEmpty(() => encodedToken);
 
             _encodedToken = encodedToken;
         }

@@ -14,11 +14,6 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.RestProxies.Servic
     [TestFixture]
     public class RestProxyUnitTests
     {
-        private Mock<IHttpClientProxyFactory> _httpClientProxyFactoryMock;
-        private Mock<IHttpRequestFactory> _httpRequestFactoryMock;
-        private Mock<IRestCallBuilderFactory> _restCallBuilderFactoryMock;
-        private RestProxy _sut;
-
         [SetUp]
         public void Align()
         {
@@ -31,6 +26,11 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.RestProxies.Servic
                 _restCallBuilderFactoryMock.Object,
                 _httpClientProxyFactoryMock.Object);
         }
+
+        private Mock<IHttpClientProxyFactory> _httpClientProxyFactoryMock;
+        private Mock<IHttpRequestFactory> _httpRequestFactoryMock;
+        private Mock<IRestCallBuilderFactory> _restCallBuilderFactoryMock;
+        private RestProxy _sut;
 
         [Test]
         public async Task PerformingCall_CallsHttpClientProxyFactory_Once()
@@ -87,6 +87,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.RestProxies.Servic
             RestCall nullRestCall = null;
 
             // Act & Assert
+            //// ReSharper disable once ExpressionIsAlwaysNull
             Assert.ThrowsAsync<ArgumentException>(() => _sut.PerformCallAsync<string>(nullRestCall));
         }
     }

@@ -22,11 +22,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models
             var headers = new RestHeaders(new List<RestHeader>());
             var body = Maybe.CreateSome(RestCallBody.CreateApplicationJson(new object()));
 
-            var queryParameterList = new List<QueryParameter>
-            {
-                new QueryParameter("Key1", "Value1", "Value2"),
-                new QueryParameter("Key2", "Value3")
-            };
+            var queryParameterList = new List<QueryParameter> { new QueryParameter("Key1", "Value1", "Value2"), new QueryParameter("Key2", "Value3") };
 
             const string ExpectedUriString = UriString + "?Key1=Value1&Key1=Value2&Key2=Value3";
             var expectedFullUri = new Uri(ExpectedUriString);

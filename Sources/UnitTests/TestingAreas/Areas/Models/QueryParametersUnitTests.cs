@@ -28,10 +28,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models
         public void AppendingQueryParameters_HavingQueryParameters_WithoutValues_DoesNotAppendQueryParameters()
         {
             // Arrange
-            var queryParamsList = new List<QueryParameter>
-            {
-                new QueryParameter("Key1")
-            };
+            var queryParamsList = new List<QueryParameter> { new QueryParameter("Key1") };
 
             var queryParameters = new QueryParameters(queryParamsList);
             var sb = new StringBuilder();
@@ -48,11 +45,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.Models
         public void AppendingQueryParameters_HavingQueryParameters_WithValues_AppendsQueryParameters()
         {
             // Arrange
-            var queryParamsList = new List<QueryParameter>
-            {
-                new QueryParameter("Key1", "Val1", "Val2"),
-                new QueryParameter("Key2", "Val3")
-            };
+            var queryParamsList = new List<QueryParameter> { new QueryParameter("Key1", "Val1", "Val2"), new QueryParameter("Key2", "Val3") };
 
             const string ExpectedQueryParamStr = "?Key1=Val1&Key1=Val2&Key2=Val3";
 
