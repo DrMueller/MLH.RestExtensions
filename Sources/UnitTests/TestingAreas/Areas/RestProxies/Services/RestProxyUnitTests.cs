@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Mmu.Mlh.RestExtensions.Areas.Exceptions;
 using Mmu.Mlh.RestExtensions.Areas.Models;
 using Mmu.Mlh.RestExtensions.Areas.RestCallBuilding;
 using Mmu.Mlh.RestExtensions.Areas.RestProxies.Implementation;
 using Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants;
-using Mmu.Mlh.RestExtensions.Infrastructure.Exceptions;
 using Moq;
 using NUnit.Framework;
 
