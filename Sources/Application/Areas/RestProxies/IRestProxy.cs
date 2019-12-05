@@ -5,7 +5,7 @@ using Mmu.Mlh.RestExtensions.Areas.RestCallBuilding;
 
 namespace Mmu.Mlh.RestExtensions.Areas.RestProxies
 {
-    public interface IRestProxy
+    public interface IRestProxy : IDisposable
     {
         Task<T> PerformCallAsync<T>(RestCall restCall);
 
