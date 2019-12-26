@@ -22,10 +22,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation
         private static void CheckAddBody(HttpRequestMessage httpRequestMessage, Maybe<RestCallBody> body)
         {
             body.Evaluate(
-                bodyObj =>
-                {
-                    httpRequestMessage.Content = bodyObj.CreateHttpContent();
-                });
+                bodyObj => { httpRequestMessage.Content = bodyObj.CreateHttpContent(); });
         }
 
         private static HttpMethod MapHttpMethod(RestCallMethodType methodType)

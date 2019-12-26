@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Mmu.Mlh.RestExtensions.Areas.Exceptions;
 using Mmu.Mlh.RestExtensions.Areas.Models;
@@ -35,7 +36,8 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation
             }
             catch (HttpRequestException httpRequestException)
             {
-                throw new RestCallException(httpRequestException.Message);
+                var exception = await BuildExceptionAsync(httpRequestException, httpResponseMessage);
+                throw exception;
             }
             finally
             {
@@ -56,6 +58,38 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation
             }
 
             _disposed = true;
+        }
+
+        private static async Task<RestCallException> BuildExceptionAsync(HttpRequestException httpRequestException, HttpResponseMessage response)
+        {
+            var sb = new StringBuilder();
+            sb.Append("Message: ");
+            sb.AppendLine(httpRequestException.Message);
+
+            if (response != null)
+            {
+                sb.Append("Status code: ");
+                sb.AppendLine(response.StatusCode.ToString());
+
+                if (!string.IsNullOrEmpty(response.ReasonPhrase))
+                {
+                    sb.Append("Reason: ");
+                    sb.AppendLine(response.ReasonPhrase);
+                }
+
+                if (response.Content != null)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    if (!string.IsNullOrEmpty(responseContent))
+                    {
+                        sb.Append("Response content: ");
+                        sb.AppendLine(responseContent);
+                    }
+                }
+            }
+
+            var exceptionMessage = sb.ToString();
+            throw new RestCallException(exceptionMessage);
         }
 
         ~HttpClientProxy()
