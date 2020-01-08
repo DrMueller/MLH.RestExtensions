@@ -1,9 +1,8 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Mmu.Mlh.RestExtensions.Areas.Exceptions;
 using Mmu.Mlh.RestExtensions.Areas.Models;
-using Mmu.Mlh.RestExtensions.Areas.RestCallBuilding;
 using Mmu.Mlh.RestExtensions.Areas.RestProxies.Implementation;
 using Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants;
 using Moq;
@@ -18,18 +17,18 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.RestProxies.Servic
         public void Align()
         {
             _httpRequestFactoryMock = new Mock<IHttpRequestFactory>();
-            _restCallBuilderFactoryMock = new Mock<IRestCallBuilderFactory>();
+            _restCallResultAdapterMock = new Mock<IRestCallResultAdapter>();
             _httpClientProxyMock = new Mock<IHttpClientProxy>();
 
             _sut = new RestProxy(
                 _httpRequestFactoryMock.Object,
-                _restCallBuilderFactoryMock.Object,
+                _restCallResultAdapterMock.Object,
                 _httpClientProxyMock.Object);
         }
 
         private Mock<IHttpClientProxy> _httpClientProxyMock;
         private Mock<IHttpRequestFactory> _httpRequestFactoryMock;
-        private Mock<IRestCallBuilderFactory> _restCallBuilderFactoryMock;
+        private Mock<IRestCallResultAdapter> _restCallResultAdapterMock;
         private RestProxy _sut;
 
         [Test]
@@ -37,8 +36,9 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.RestProxies.Servic
         {
             // Arrange
             var restCall = DataGenerator.CreateDefaultRestCall();
+            var responseMessage = new HttpResponseMessage(HttpStatusCode.Accepted);
             _httpClientProxyMock.Setup(f => f.SendAsync(It.IsAny<HttpRequestMessage>())).Returns(
-                Task.FromResult(new HttpResponse(true, string.Empty)));
+                Task.FromResult(responseMessage));
 
             // Act
             await _sut.PerformCallAsync<string>(restCall);
@@ -52,26 +52,15 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.RestProxies.Servic
         {
             // Arrange
             var restCall = DataGenerator.CreateDefaultRestCall();
+            var responseMessage = new HttpResponseMessage(HttpStatusCode.Accepted);
             _httpClientProxyMock.Setup(f => f.SendAsync(It.IsAny<HttpRequestMessage>())).Returns(
-                Task.FromResult(new HttpResponse(true, string.Empty)));
+                Task.FromResult(responseMessage));
 
             // Act
             await _sut.PerformCallAsync<string>(restCall);
 
             // Assert
             _httpRequestFactoryMock.Verify(f => f.Create(restCall), Times.Once);
-        }
-
-        [Test]
-        public void PerformingCall_ReturningStatusCodeNotSuccessful_ThrowsRestCallException()
-        {
-            // Arrange
-            var restCall = DataGenerator.CreateDefaultRestCall();
-            _httpClientProxyMock.Setup(f => f.SendAsync(It.IsAny<HttpRequestMessage>())).Returns(
-                Task.FromResult(new HttpResponse(false, string.Empty)));
-
-            // Act & Assert
-            Assert.ThrowsAsync<RestCallException>(() => _sut.PerformCallAsync<string>(restCall));
         }
 
         [Test]

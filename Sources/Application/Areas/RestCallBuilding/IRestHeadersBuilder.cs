@@ -3,6 +3,7 @@
     public interface IRestHeadersBuilder
     {
         IRestCallBuilder BuildHeaders();
+
         IRestHeadersBuilder WithHeader(string name, string value);
     }
 }

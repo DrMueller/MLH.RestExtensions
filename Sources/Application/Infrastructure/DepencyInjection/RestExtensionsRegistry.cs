@@ -26,6 +26,7 @@ namespace Mmu.Mlh.RestExtensions.Infrastructure.DepencyInjection
             For<IStandaloneQueryParameterBuilderFactory>().Use<StandaloneQueryParameterBuilderFactory>().Singleton();
             For<IHttpRequestFactory>().Use<HttpRequestFactory>().Singleton();
             For<IHttpClientProxy>().Use<HttpClientProxy>().Singleton();
+            For<IRestCallResultAdapter>().Use<RestCallResultAdapter>().Singleton();
         }
     }
 }

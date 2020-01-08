@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Mmu.Mlh.RestExtensions.Areas.Exceptions;
 using Mmu.Mlh.RestExtensions.Areas.RestProxies;
 using Mmu.Mlh.RestExtensions.IntegrationTests.TestingInfrastructure.Models;
 using Mmu.Mlh.TestingExtensions.Areas.Common.BasesClasses;
@@ -29,22 +28,27 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
 
             // Act
             var actualResponse = await _sut.PerformCallAsync<Todo>(restCall);
+            var content = actualResponse.Content;
 
             // Assert
-            Assert.AreEqual(1, actualResponse.Id);
-            Assert.AreEqual(1, actualResponse.UserId);
-            Assert.AreEqual("delectus aut autem", actualResponse.Title);
-            Assert.AreEqual(false, actualResponse.Completed);
+            Assert.IsNotNull(content);
+            Assert.AreEqual(1, content.Id);
+            Assert.AreEqual(1, content.UserId);
+            Assert.AreEqual("delectus aut autem", content.Title);
+            Assert.AreEqual(false, content.Completed);
         }
 
         [Test]
-        public void PerformingCall_WithNotExistingUrl_ThrowsRestCallException()
+        public async Task PerformingCall_WithNotExistingUrl_ReturnsFailure()
         {
             // Arrange
             var restCall = DataGenerator.CreateNotExistingUrlRestCall();
 
             // Act
-            Assert.ThrowsAsync<RestCallException>(() => _sut.PerformCallAsync<string>(restCall));
+            var actualResponse = await _sut.PerformCallAsync(restCall);
+
+            // Assert
+            Assert.IsFalse(actualResponse.WasSuccess);
         }
 
         [Test]
@@ -55,10 +59,11 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
 
             // Act
             var actualResponse = await _sut.PerformCallAsync<List<Post>>(restCall);
+            var content = actualResponse.Content;
 
             // Assert
-            Assert.AreEqual(5, actualResponse.Count);
-            Assert.IsTrue(actualResponse.All(f => f.PostId == 1));
+            Assert.AreEqual(5, content.Count);
+            Assert.IsTrue(content.All(f => f.PostId == 1));
         }
 
         [Test]
@@ -73,13 +78,14 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
 
             // Act
             var actualResponse = await _sut.PerformCallAsync<Todo>(restCall);
+            var content = actualResponse.Content;
 
             // Assert
-            Assert.IsNotNull(actualResponse);
-            Assert.IsTrue(actualResponse.Id > 0);
-            Assert.AreEqual(todo.Completed, actualResponse.Completed);
-            Assert.AreEqual(todo.Title, actualResponse.Title);
-            Assert.AreEqual(todo.UserId, actualResponse.UserId);
+            Assert.IsNotNull(content);
+            Assert.IsTrue(content.Id > 0);
+            Assert.AreEqual(todo.Completed, content.Completed);
+            Assert.AreEqual(todo.Title, content.Title);
+            Assert.AreEqual(todo.UserId, content.UserId);
         }
 
         [Test]
@@ -92,13 +98,14 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
 
             // Act
             var actualResponse = await _sut.PerformCallAsync<Todo>(restCall);
+            var content = actualResponse.Content;
 
             // Assert
             Assert.IsNotNull(actualResponse);
-            Assert.IsTrue(actualResponse.Id > 0);
-            Assert.AreEqual(todo.Completed, actualResponse.Completed);
-            Assert.AreEqual(todo.Title, actualResponse.Title);
-            Assert.AreEqual(todo.UserId, actualResponse.UserId);
+            Assert.IsTrue(content.Id > 0);
+            Assert.AreEqual(todo.Completed, content.Completed);
+            Assert.AreEqual(todo.Title, content.Title);
+            Assert.AreEqual(todo.UserId, content.UserId);
         }
     }
 }
