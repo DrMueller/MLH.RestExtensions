@@ -10,13 +10,13 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.RestProxies.Servic
     [TestFixture]
     public class RestCallResultAdapterUnitTests
     {
+        private RestCallResultAdapter _sut;
+
         [SetUp]
         public void Align()
         {
             _sut = new RestCallResultAdapter();
         }
-
-        private RestCallResultAdapter _sut;
 
         [Test]
         public async Task AdaptingGeneric_BodyBeingNull_SetsContentAsNull()
