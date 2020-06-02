@@ -24,9 +24,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />
-    <PackageReference Include="Mmu.Mlh.ServiceProvisioning" Version="2.0.4" />
+    <PackageReference Include="Mmu.Mlh.ServiceProvisioning" Version="2.1.5" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="StructureMap" Version="4.7.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
   </ItemGroup>
 

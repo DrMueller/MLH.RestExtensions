@@ -2,32 +2,26 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Mmu.Mlh.RestExtensions.Areas.RestProxies;
+using Mmu.Mlh.RestExtensions.IntegrationTests.TestingInfrastructure.Context;
 using Mmu.Mlh.RestExtensions.IntegrationTests.TestingInfrastructure.Models;
-using Mmu.Mlh.TestingExtensions.Areas.Common.BasesClasses;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies.Services
 {
     [TestFixture]
-    public class RestProxyIntegrationTests : TestingBaseWithContainer
+    public class RestProxyIntegrationTests
     {
-        [SetUp]
-        public void Align()
-        {
-            _sut = ServiceLocator.GetService<IRestProxy>();
-        }
-
-        private IRestProxy _sut;
-
         [Test]
         public async Task PerformingCall_WithCorrectUrl_FetchesData()
         {
             // Arrange
+            var context = RestTestContextBuilder.Create();
+            var sut = context.ServiceLocator.GetService<IRestProxy>();
             var restCall = DataGenerator.CreateGetOneTodoRestCall();
 
             // Act
-            var actualResponse = await _sut.PerformCallAsync<Todo>(restCall);
+            var actualResponse = await sut.PerformCallAsync<Todo>(restCall);
             var content = actualResponse.Content;
 
             // Assert
@@ -42,10 +36,12 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
         public async Task PerformingCall_WithNotExistingUrl_ReturnsFailure()
         {
             // Arrange
+            var context = RestTestContextBuilder.Create();
+            var sut = context.ServiceLocator.GetService<IRestProxy>();
             var restCall = DataGenerator.CreateNotExistingUrlRestCall();
 
             // Act
-            var actualResponse = await _sut.PerformCallAsync(restCall);
+            var actualResponse = await sut.PerformCallAsync(restCall);
 
             // Assert
             Assert.IsFalse(actualResponse.WasSuccess);
@@ -55,10 +51,12 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
         public async Task PerformingCall_WithQueryParameters_FetchesData_OfPostIdOne()
         {
             // Arrange
+            var context = RestTestContextBuilder.Create();
+            var sut = context.ServiceLocator.GetService<IRestProxy>();
             var restCall = DataGenerator.CreateCommentsByPostIdRestCall();
 
             // Act
-            var actualResponse = await _sut.PerformCallAsync<List<Post>>(restCall);
+            var actualResponse = await sut.PerformCallAsync<List<Post>>(restCall);
             var content = actualResponse.Content;
 
             // Assert
@@ -70,14 +68,15 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
         public async Task PerformingPost_WithApplicationJsonFromJsonString_SendsAsJson()
         {
             // Arrange
+            var context = RestTestContextBuilder.Create();
+            var sut = context.ServiceLocator.GetService<IRestProxy>();
+
             var todo = new Todo { Completed = true, Title = "Hello Test", UserId = 123 };
-
             var jsonString = JsonConvert.SerializeObject(todo);
-
             var restCall = DataGenerator.CreatePostOneTodoRestCall(jsonString);
 
             // Act
-            var actualResponse = await _sut.PerformCallAsync<Todo>(restCall);
+            var actualResponse = await sut.PerformCallAsync<Todo>(restCall);
             var content = actualResponse.Content;
 
             // Assert
@@ -92,12 +91,14 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
         public async Task PerformingPost_WithApplicationJsonFromObject_ConvertsAndSendsAsJson()
         {
             // Arrange
-            var todo = new Todo { Completed = true, Title = "Hello Test", UserId = 123 };
+            var context = RestTestContextBuilder.Create();
+            var sut = context.ServiceLocator.GetService<IRestProxy>();
 
+            var todo = new Todo { Completed = true, Title = "Hello Test", UserId = 123 };
             var restCall = DataGenerator.CreatePostOneTodoRestCall(todo);
 
             // Act
-            var actualResponse = await _sut.PerformCallAsync<Todo>(restCall);
+            var actualResponse = await sut.PerformCallAsync<Todo>(restCall);
             var content = actualResponse.Content;
 
             // Assert

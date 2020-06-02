@@ -1,4 +1,5 @@
-﻿using Mmu.Mlh.RestExtensions.Areas.QueryParamBuilding;
+﻿using Lamar;
+using Mmu.Mlh.RestExtensions.Areas.QueryParamBuilding;
 using Mmu.Mlh.RestExtensions.Areas.QueryParamBuilding.Implementation;
 using Mmu.Mlh.RestExtensions.Areas.RestCallBuilding;
 using Mmu.Mlh.RestExtensions.Areas.RestCallBuilding.Implementation;
@@ -6,18 +7,17 @@ using Mmu.Mlh.RestExtensions.Areas.RestProxies;
 using Mmu.Mlh.RestExtensions.Areas.RestProxies.Implementation;
 using Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants;
 using Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation;
-using StructureMap;
 
 namespace Mmu.Mlh.RestExtensions.Infrastructure.DepencyInjection
 {
-    public class RestExtensionsRegistry : Registry
+    public class RestExtensionsRegistryCollection : ServiceRegistry
     {
-        public RestExtensionsRegistry()
+        public RestExtensionsRegistryCollection()
         {
             Scan(
                 scanner =>
                 {
-                    scanner.AssemblyContainingType<RestExtensionsRegistry>();
+                    scanner.AssemblyContainingType<RestExtensionsRegistryCollection>();
                     scanner.WithDefaultConventions();
                 });
 
