@@ -4,6 +4,7 @@ variables:
   BuildConfiguration: 'Release'
   FolderToPack: 'Application'
   SolutionName: 'MLH.RestExtensions.sln'
+  ApplicationSubPath: 'MLH.RestExtensions'
 
 resources:
   repositories:
@@ -23,6 +24,7 @@ jobs:
     parameters:
       BuildConfiguration: $(BuildConfiguration)
       SolutionName: $(SolutionName)
+      ApplicationSubPath: $(ApplicationSubPath)
   - template: AzureDevOps/BuildTemplates/NetCore/Steps/Pack_And_Publish_To_NuGet.yaml@ALMStuff
     parameters:
       FolderToPack: $(FolderToPack)
