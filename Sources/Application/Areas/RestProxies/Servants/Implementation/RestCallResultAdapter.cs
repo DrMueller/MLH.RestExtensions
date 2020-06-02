@@ -15,7 +15,12 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation
 
         public async Task<RestCallResult<T>> AdaptResultAsync<T>(HttpResponseMessage response)
         {
-            var content = await AdaptResultContentAsync<T>(response.Content);
+            var content = default(T);
+            if (response.IsSuccessStatusCode)
+            {
+                content = await AdaptResultContentAsync<T>(response.Content);
+            }
+
             return new RestCallResult<T>((int)response.StatusCode, response.ReasonPhrase, content);
         }
 

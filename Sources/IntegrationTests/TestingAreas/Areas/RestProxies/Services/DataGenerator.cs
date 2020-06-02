@@ -35,12 +35,24 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
                 new QueryParameters(new List<QueryParameter>()));
         }
 
-        internal static RestCall CreateNotExistingUrlRestCall()
+        internal static RestCall CreateNotExistingGetRestCall()
         {
             return new RestCall(
-                new Uri("https://http://googl12345.com/"),
+                new Uri("https://googl12345.com/"),
                 Maybe.CreateNone<string>(),
                 RestCallMethodType.Get,
+                RestSecurity.CreateAnonymous(),
+                new RestHeaders(new List<RestHeader>()),
+                Maybe.CreateNone<RestCallBody>(),
+                new QueryParameters(new List<QueryParameter>()));
+        }
+
+        internal static RestCall CreateNotExistingPostRestCall()
+        {
+            return new RestCall(
+                new Uri("https://google.com/"),
+                Maybe.CreateNone<string>(),
+                RestCallMethodType.Post,
                 RestSecurity.CreateAnonymous(),
                 new RestHeaders(new List<RestHeader>()),
                 Maybe.CreateNone<RestCallBody>(),

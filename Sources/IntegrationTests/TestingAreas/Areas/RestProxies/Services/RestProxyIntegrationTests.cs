@@ -33,21 +33,6 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
         }
 
         [Test]
-        public async Task PerformingCall_WithNotExistingUrl_ReturnsFailure()
-        {
-            // Arrange
-            var context = RestTestContextBuilder.Create();
-            var sut = context.ServiceLocator.GetService<IRestProxy>();
-            var restCall = DataGenerator.CreateNotExistingUrlRestCall();
-
-            // Act
-            var actualResponse = await sut.PerformCallAsync(restCall);
-
-            // Assert
-            Assert.IsFalse(actualResponse.WasSuccess);
-        }
-
-        [Test]
         public async Task PerformingCall_WithQueryParameters_FetchesData_OfPostIdOne()
         {
             // Arrange
@@ -62,6 +47,21 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
             // Assert
             Assert.AreEqual(5, content.Count);
             Assert.IsTrue(content.All(f => f.PostId == 1));
+        }
+
+        [Test]
+        public async Task PerformingGet_WithNotExistingUrl_ReturnsFailure()
+        {
+            // Arrange
+            var context = RestTestContextBuilder.Create();
+            var sut = context.ServiceLocator.GetService<IRestProxy>();
+            var restCall = DataGenerator.CreateNotExistingGetRestCall();
+
+            // Act
+            var actualResponse = await sut.PerformCallAsync(restCall);
+
+            // Assert
+            Assert.IsFalse(actualResponse.WasSuccess);
         }
 
         [Test]
@@ -107,6 +107,22 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
             Assert.AreEqual(todo.Completed, content.Completed);
             Assert.AreEqual(todo.Title, content.Title);
             Assert.AreEqual(todo.UserId, content.UserId);
+        }
+
+        [Test]
+        public async Task PerformingPost_WithNotExistingUrl_ReturnsFailure()
+        {
+            // Arrange
+            var context = RestTestContextBuilder.Create();
+            var sut = context.ServiceLocator.GetService<IRestProxy>();
+            var restCall = DataGenerator.CreateNotExistingPostRestCall();
+
+            // Act
+            var actualResponse = await sut.PerformCallAsync<Todo>(restCall);
+
+            // Assert
+            Assert.AreEqual(405, actualResponse.StatusCode);
+            Assert.IsNull(actualResponse.Content);
         }
     }
 }
