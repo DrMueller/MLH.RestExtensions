@@ -6,7 +6,13 @@ variables:
   SolutionName: 'MLH.RestExtensions.sln'
   ApplicationSubPath: 'MLH.RestExtensions'
 
-
+resources:
+  repositories:
+  - repository: ALMStuff
+    type: github
+    name: DrMueller/ALMStuff
+    ref: refs/heads/master
+    endpoint: GitHub-DrMueller
 
 jobs:
 - job: 'BuildAndPublishToNuGet'
