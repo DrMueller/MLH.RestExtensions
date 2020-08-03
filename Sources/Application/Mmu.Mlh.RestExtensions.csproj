@@ -1,32 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Features>IOperation</Features>
-    <CodeAnalysisRuleSet>..\..\CA_ProductionCode.ruleset</CodeAnalysisRuleSet>
-    <Authors>DrMueller</Authors>
-    <Company>DrMuellerDrMueller</Company>
-    <Product>MyLittleHelpers.RestExtensions</Product>
-    <Description>DrMuellers little REST Extensions</Description>
-    <PackageIconUrl>https://raw.githubusercontent.com/DrMueller/MLH.RestExtensions/master/Sources/Application/Infrastructure/Assets/M.png</PackageIconUrl>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <AssemblyVersion Condition="'$(BUILD_BUILDNUMBER)' != '' ">$(BUILD_BUILDNUMBER)</AssemblyVersion>
-    <FileVersion Condition="'$(BUILD_BUILDNUMBER)' != '' ">$(BUILD_BUILDNUMBER)</FileVersion>
-    <Version Condition="'$(BUILD_BUILDNUMBER)' != '' ">$(BUILD_BUILDNUMBER)</Version>
-    <AssemblyVersion Condition="'$(BUILD_BUILDNUMBER)' == '' ">1.0.0.0</AssemblyVersion>
-    <FileVersion Condition="'$(BUILD_BUILDNUMBER)' == '' ">1.0.0.0</FileVersion>
-    <Version Condition="'$(BUILD_BUILDNUMBER)' == '' ">1.0.0.0</Version>
-  </PropertyGroup>
+ <PropertyGroup>
+  <TargetFramework>netstandard2.0</TargetFramework>
+  <Features>IOperation</Features>
+  <CodeAnalysisRuleSet>..\..\CA_ProductionCode.ruleset</CodeAnalysisRuleSet>
+  <Authors>DrMueller</Authors>
+  <Company>DrMuellerDrMueller</Company>
+  <Product>MyLittleHelpers.RestExtensions</Product>
+  <Description>DrMuellers little REST Extensions</Description>
+  <PackageIconUrl>https://raw.githubusercontent.com/DrMueller/MLH.RestExtensions/master/Sources/Application/Infrastructure/Assets/M.png</PackageIconUrl>
+  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  <AssemblyVersion Condition="'$(BUILD_BUILDNUMBER)' != '' ">$(BUILD_BUILDNUMBER)</AssemblyVersion>
+  <FileVersion Condition="'$(BUILD_BUILDNUMBER)' != '' ">$(BUILD_BUILDNUMBER)</FileVersion>
+  <Version Condition="'$(BUILD_BUILDNUMBER)' != '' ">$(BUILD_BUILDNUMBER)</Version>
+  <AssemblyVersion Condition="'$(BUILD_BUILDNUMBER)' == '' ">1.0.0.0</AssemblyVersion>
+  <FileVersion Condition="'$(BUILD_BUILDNUMBER)' == '' ">1.0.0.0</FileVersion>
+  <Version Condition="'$(BUILD_BUILDNUMBER)' == '' ">1.0.0.0</Version>
+ </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure\Assets\" />
-  </ItemGroup>
+ <ItemGroup>
+  <Folder Include="Infrastructure\Assets\" />
+ </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />
-    <PackageReference Include="Mmu.Mlh.ServiceProvisioning" Version="2.1.5" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
-  </ItemGroup>
+ <ItemGroup>
+  <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />
+  <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.6" />
+  <PackageReference Include="Mmu.Mlh.ServiceProvisioning" Version="2.1.5" />
+  <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
+ </ItemGroup>
 
 </Project>

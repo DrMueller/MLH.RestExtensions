@@ -31,9 +31,14 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation
                 return default;
             }
 
-            var stringContent = await content.ReadAsStringAsync();
-
             var targetType = typeof(T);
+            if (targetType == typeof(byte[]))
+            {
+                var bytes = await content.ReadAsByteArrayAsync();
+                return (T)Convert.ChangeType(bytes, typeof(byte[]));
+            }
+
+            var stringContent = await content.ReadAsStringAsync();
             if (targetType.IsPrimitive || targetType == typeof(string))
             {
                 return (T)Convert.ChangeType(stringContent, typeof(T));

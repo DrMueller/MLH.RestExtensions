@@ -1,13 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Mmu.Mlh.RestExtensions.Areas.Models;
 
 namespace Mmu.Mlh.RestExtensions.Areas.RestProxies
 {
-    public interface IRestProxy : IDisposable
+    public interface IRestProxy
     {
-        Task<RestCallResult<T>> PerformCallAsync<T>(RestCall restCall);
+        Task<RestCallResult<T>> SendAsync<T>(RestCall restCall);
 
-        Task<RestCallResult> PerformCallAsync(RestCall restCall);
+        Task<RestCallResult> SendAsync(RestCall restCall);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Mmu.Mlh.LanguageExtensions.Areas.Invariance;
 using Mmu.Mlh.RestExtensions.Areas.Models;
@@ -12,7 +11,6 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Implementation
         private readonly IHttpClientProxy _httpClientProxy;
         private readonly IHttpRequestFactory _httpRequestFactory;
         private readonly IRestCallResultAdapter _resultAdapter;
-        private bool _disposed;
 
         public RestProxy(
             IHttpRequestFactory httpRequestFactory,
@@ -24,13 +22,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Implementation
             _httpClientProxy = httpClientProxy;
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        public async Task<RestCallResult> PerformCallAsync(RestCall restCall)
+        public async Task<RestCallResult> SendAsync(RestCall restCall)
         {
             try
             {
@@ -45,7 +37,7 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Implementation
             }
         }
 
-        public async Task<RestCallResult<T>> PerformCallAsync<T>(RestCall restCall)
+        public async Task<RestCallResult<T>> SendAsync<T>(RestCall restCall)
         {
             try
             {
@@ -60,31 +52,12 @@ namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Implementation
             }
         }
 
-        private void Dispose(bool disposing)
-        {
-            if (_disposed)
-            {
-                return;
-            }
-
-            if (disposing)
-            {
-                _httpClientProxy.Dispose();
-            }
-
-            _disposed = true;
-        }
-
         private async Task<HttpResponseMessage> ExecuteCallAsync(RestCall restCall)
         {
             Guard.ObjectNotNull(() => restCall);
             var request = _httpRequestFactory.Create(restCall);
-            return await _httpClientProxy.SendAsync(request);
-        }
 
-        ~RestProxy()
-        {
-            Dispose(false);
+            return await _httpClientProxy.SendAsync(request);
         }
     }
 }

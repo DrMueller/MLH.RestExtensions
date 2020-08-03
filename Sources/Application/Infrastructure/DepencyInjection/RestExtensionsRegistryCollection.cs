@@ -1,4 +1,5 @@
 ﻿using Lamar;
+using Microsoft.Extensions.DependencyInjection;
 using Mmu.Mlh.RestExtensions.Areas.QueryParamBuilding;
 using Mmu.Mlh.RestExtensions.Areas.QueryParamBuilding.Implementation;
 using Mmu.Mlh.RestExtensions.Areas.RestCallBuilding;
@@ -25,8 +26,9 @@ namespace Mmu.Mlh.RestExtensions.Infrastructure.DepencyInjection
             For<IRestCallBuilderFactory>().Use<RestCallBuilderFactory>().Singleton();
             For<IStandaloneQueryParameterBuilderFactory>().Use<StandaloneQueryParameterBuilderFactory>().Singleton();
             For<IHttpRequestFactory>().Use<HttpRequestFactory>().Singleton();
-            For<IHttpClientProxy>().Use<HttpClientProxy>().Singleton();
             For<IRestCallResultAdapter>().Use<RestCallResultAdapter>().Singleton();
+            For<IHttpClientProxy>().Use<HttpClientProxy>().Singleton();
+            this.AddHttpClient();
         }
     }
 }
