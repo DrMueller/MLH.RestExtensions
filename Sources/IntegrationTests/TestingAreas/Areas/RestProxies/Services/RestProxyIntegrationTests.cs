@@ -21,7 +21,7 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
             var restCall = DataGenerator.CreateGetOneTodoRestCall();
 
             // Act
-            var actualResponse = await sut.PerformCallAsync<Todo>(restCall);
+            var actualResponse = await sut.SendAsync<Todo>(restCall);
             var content = actualResponse.Content;
 
             // Assert
@@ -41,7 +41,7 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
             var restCall = DataGenerator.CreateCommentsByPostIdRestCall();
 
             // Act
-            var actualResponse = await sut.PerformCallAsync<List<Post>>(restCall);
+            var actualResponse = await sut.SendAsync<List<Post>>(restCall);
             var content = actualResponse.Content;
 
             // Assert
@@ -58,7 +58,7 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
             var restCall = DataGenerator.CreateNotExistingGetRestCall();
 
             // Act
-            var actualResponse = await sut.PerformCallAsync(restCall);
+            var actualResponse = await sut.SendAsync(restCall);
 
             // Assert
             Assert.IsFalse(actualResponse.WasSuccess);
@@ -76,7 +76,7 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
             var restCall = DataGenerator.CreatePostOneTodoRestCall(jsonString);
 
             // Act
-            var actualResponse = await sut.PerformCallAsync<Todo>(restCall);
+            var actualResponse = await sut.SendAsync<Todo>(restCall);
             var content = actualResponse.Content;
 
             // Assert
@@ -98,7 +98,7 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
             var restCall = DataGenerator.CreatePostOneTodoRestCall(todo);
 
             // Act
-            var actualResponse = await sut.PerformCallAsync<Todo>(restCall);
+            var actualResponse = await sut.SendAsync<Todo>(restCall);
             var content = actualResponse.Content;
 
             // Assert
@@ -118,7 +118,7 @@ namespace Mmu.Mlh.RestExtensions.IntegrationTests.TestingAreas.Areas.RestProxies
             var restCall = DataGenerator.CreateNotExistingPostRestCall();
 
             // Act
-            var actualResponse = await sut.PerformCallAsync<Todo>(restCall);
+            var actualResponse = await sut.SendAsync<Todo>(restCall);
 
             // Assert
             Assert.AreEqual(405, actualResponse.StatusCode);

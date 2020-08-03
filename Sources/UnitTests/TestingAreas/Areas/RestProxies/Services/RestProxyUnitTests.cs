@@ -13,6 +13,11 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.RestProxies.Servic
     [TestFixture]
     public class RestProxyUnitTests
     {
+        private Mock<IHttpClientProxy> _httpClientProxyMock;
+        private Mock<IHttpRequestFactory> _httpRequestFactoryMock;
+        private Mock<IRestCallResultAdapter> _restCallResultAdapterMock;
+        private RestProxy _sut;
+
         [SetUp]
         public void Align()
         {
@@ -26,11 +31,6 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.RestProxies.Servic
                 _httpClientProxyMock.Object);
         }
 
-        private Mock<IHttpClientProxy> _httpClientProxyMock;
-        private Mock<IHttpRequestFactory> _httpRequestFactoryMock;
-        private Mock<IRestCallResultAdapter> _restCallResultAdapterMock;
-        private RestProxy _sut;
-
         [Test]
         public async Task PerformingCall_CallsHttpClientProxy_ForSending_Once()
         {
@@ -41,7 +41,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.RestProxies.Servic
                 Task.FromResult(responseMessage));
 
             // Act
-            await _sut.PerformCallAsync<string>(restCall);
+            await _sut.SendAsync<string>(restCall);
 
             // Assert
             _httpClientProxyMock.Verify(f => f.SendAsync(It.IsAny<HttpRequestMessage>()), Times.Once);
@@ -57,7 +57,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.RestProxies.Servic
                 Task.FromResult(responseMessage));
 
             // Act
-            await _sut.PerformCallAsync<string>(restCall);
+            await _sut.SendAsync<string>(restCall);
 
             // Assert
             _httpRequestFactoryMock.Verify(f => f.Create(restCall), Times.Once);
@@ -71,7 +71,7 @@ namespace Mmu.Mlh.RestExtensions.UnitTests.TestingAreas.Areas.RestProxies.Servic
 
             // Act & Assert
             //// ReSharper disable once ExpressionIsAlwaysNull
-            Assert.ThrowsAsync<ArgumentException>(() => _sut.PerformCallAsync<string>(nullRestCall));
+            Assert.ThrowsAsync<ArgumentException>(() => _sut.SendAsync<string>(nullRestCall));
         }
     }
 }

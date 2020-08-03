@@ -1,48 +1,23 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation
 {
     internal sealed class HttpClientProxy : IHttpClientProxy
     {
-        private readonly HttpClient _httpClient;
-        private bool _disposed;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public HttpClientProxy()
+        public HttpClientProxy(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = new HttpClient();
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            _httpClientFactory = httpClientFactory;
         }
 
         public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
         {
-            return await _httpClient.SendAsync(request);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (_disposed)
+            using (var httpClient = _httpClientFactory.CreateClient())
             {
-                return;
+                return await httpClient.SendAsync(request);
             }
-
-            if (disposing)
-            {
-                _httpClient.Dispose();
-            }
-
-            _disposed = true;
-        }
-
-        ~HttpClientProxy()
-        {
-            Dispose(false);
         }
     }
 }

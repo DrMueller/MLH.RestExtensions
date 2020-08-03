@@ -2,8 +2,11 @@
 
 namespace Mmu.Mlh.RestExtensions.Areas.Models
 {
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification =
-        "It makes sense to keep these Classes together")]
+    [SuppressMessage(
+        "StyleCop.CSharp.MaintainabilityRules",
+        "SA1402:FileMayOnlyContainASingleClass",
+        Justification =
+            "It makes sense to keep these Classes together")]
     public class RestCallResult<T> : RestCallResult
     {
         public T Content { get; }
