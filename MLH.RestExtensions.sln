@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.Mlh.RestExtensions.Unit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.Mlh.RestExtensions.IntegrationTests", "Sources\IntegrationTests\Mmu.Mlh.RestExtensions.IntegrationTests.csproj", "{AC4BB4BB-85E7-4152-A7E8-8C100278012C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.Mlh.RestExtensions.BddTests", "Sources\BddTests\Mmu.Mlh.RestExtensions.BddTests.csproj", "{FE086E3D-54D9-483B-BC09-3323D56A53CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AC4BB4BB-85E7-4152-A7E8-8C100278012C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC4BB4BB-85E7-4152-A7E8-8C100278012C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC4BB4BB-85E7-4152-A7E8-8C100278012C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE086E3D-54D9-483B-BC09-3323D56A53CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE086E3D-54D9-483B-BC09-3323D56A53CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE086E3D-54D9-483B-BC09-3323D56A53CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE086E3D-54D9-483B-BC09-3323D56A53CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
