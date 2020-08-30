@@ -1,4 +1,5 @@
-﻿using Lamar;
+﻿using JetBrains.Annotations;
+using Lamar;
 using Microsoft.Extensions.DependencyInjection;
 using Mmu.Mlh.RestExtensions.Areas.QueryParamBuilding;
 using Mmu.Mlh.RestExtensions.Areas.QueryParamBuilding.Implementation;
@@ -11,6 +12,7 @@ using Mmu.Mlh.RestExtensions.Areas.RestProxies.Servants.Implementation;
 
 namespace Mmu.Mlh.RestExtensions.Infrastructure.DepencyInjection
 {
+    [UsedImplicitly]
     public class RestExtensionsRegistryCollection : ServiceRegistry
     {
         public RestExtensionsRegistryCollection()

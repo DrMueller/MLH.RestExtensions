@@ -1,5 +1,8 @@
-﻿namespace Mmu.Mlh.RestExtensions.BddTests.TestingInfrastructure.Models
+﻿using JetBrains.Annotations;
+
+namespace Mmu.Mlh.RestExtensions.BddTests.TestingInfrastructure.Models
 {
+    [PublicAPI]
     public class Comment
     {
         public string Email { get; set; }
