@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.Mlh.RestExtensions.Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mmu.Mlh.RestExtensions.BddTests", "Sources\BddTests\Mmu.Mlh.RestExtensions.BddTests.csproj", "{FE086E3D-54D9-483B-BC09-3323D56A53CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mmu.Mlh.RestExtensionsSimple", "Mmu.Mlh.RestExtensionsSimple\Mmu.Mlh.RestExtensionsSimple.csproj", "{B35E1624-8184-461E-B043-90F84130D910}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mmu.Mlh.RestExtensionsSimple.UnitTests", "Mmu.Mlh.RestExtensionsSimple.UnitTests\Mmu.Mlh.RestExtensionsSimple.UnitTests.csproj", "{48C676A4-8949-4E6B-AA10-83AF984A26E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{FE086E3D-54D9-483B-BC09-3323D56A53CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE086E3D-54D9-483B-BC09-3323D56A53CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE086E3D-54D9-483B-BC09-3323D56A53CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B35E1624-8184-461E-B043-90F84130D910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B35E1624-8184-461E-B043-90F84130D910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B35E1624-8184-461E-B043-90F84130D910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B35E1624-8184-461E-B043-90F84130D910}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48C676A4-8949-4E6B-AA10-83AF984A26E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48C676A4-8949-4E6B-AA10-83AF984A26E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48C676A4-8949-4E6B-AA10-83AF984A26E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48C676A4-8949-4E6B-AA10-83AF984A26E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
