@@ -60,28 +60,29 @@ namespace Mmu.Mlh.RestExtensionsSimple.Areas.Services.Implementation
 
         private static async Task LogResponseAsync(HttpResponseMessage httpResponseMessage, string requestUri)
         {
-            if (!httpResponseMessage.IsSuccessStatusCode)
+            var sb = new StringBuilder();
+            sb.Append("HTTP request returned with Status Code: ");
+            sb.Append(httpResponseMessage.StatusCode.ToString());
+            sb.Append(". Request URI: ");
+            sb.Append(requestUri);
+
+            if (httpResponseMessage.Content != null)
             {
-                var sb = new StringBuilder();
-                sb.Append("HTTP request returned with error. Status Code: ");
-                sb.Append(httpResponseMessage.StatusCode.ToString());
-                sb.Append(". Request URI: ");
-                sb.Append(requestUri);
+                var responseContent = await httpResponseMessage.Content.ReadAsStringAsync();
 
-                if (httpResponseMessage.Content != null)
+                if (!string.IsNullOrEmpty(responseContent))
                 {
-                    var responseContent = await httpResponseMessage.Content.ReadAsStringAsync();
-
-                    if (!string.IsNullOrEmpty(responseContent))
-                    {
-                        sb.Append(". Response content: ");
-                        sb.AppendLine(responseContent);
-                    }
+                    sb.Append(". Response content: ");
+                    sb.AppendLine(responseContent);
                 }
-
-                var message = sb.ToString();
-                Debug.WriteLine(message);
             }
+            else
+            {
+                sb.Append(". No resonse content.");
+            }
+
+            var message = sb.ToString();
+            Debug.WriteLine(message);
         }
     }
 }
