@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Features>IOperation</Features>
-    <CodeAnalysisRuleSet>..\..\CA_TestCode.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+ <PropertyGroup>
+  <TargetFramework>netcoreapp3.1</TargetFramework>
+  <Features>IOperation</Features>
+  <CodeAnalysisRuleSet>..\..\CA_TestCode.ruleset</CodeAnalysisRuleSet>
+ </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="LightBDD.Framework" Version="3.2.0" />
-    <PackageReference Include="LightBDD.NUnit3" Version="3.2.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
-    <PackageReference Include="Mmu.Mlh.TestingExtensions" Version="2.2.10" />
-    <PackageReference Include="NUnit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
-  </ItemGroup>
+ <ItemGroup>
+  <PackageReference Include="LightBDD.Framework" Version="3.2.0" />
+  <PackageReference Include="LightBDD.NUnit3" Version="3.2.0" />
+  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+  <PackageReference Include="Mmu.Mlh.TestingExtensions" Version="2.2.10" />
+  <PackageReference Include="NUnit" Version="3.12.0" />
+  <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+ </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Application\Mmu.Mlh.RestExtensions.csproj" />
-  </ItemGroup>
+ <ItemGroup>
+  <ProjectReference Include="..\Application\Mmu.Mlh.RestExtensions.csproj" />
+ </ItemGroup>
 
 </Project>
