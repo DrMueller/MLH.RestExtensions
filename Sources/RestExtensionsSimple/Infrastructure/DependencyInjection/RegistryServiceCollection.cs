@@ -1,4 +1,5 @@
-﻿using Lamar;
+﻿using JetBrains.Annotations;
+using Lamar;
 using Microsoft.Extensions.DependencyInjection;
 using Mmu.Mlh.RestExtensionsSimple.Areas.Services;
 using Mmu.Mlh.RestExtensionsSimple.Areas.Services.Implementation;
@@ -7,6 +8,7 @@ using Mmu.Mlh.RestExtensionsSimple.Areas.Services.Servants.Implementation;
 
 namespace Mmu.Mlh.RestExtensionsSimple.Infrastructure.DependencyInjection
 {
+    [UsedImplicitly]
     public class RegistryServiceCollection : ServiceRegistry
     {
         public RegistryServiceCollection()
