@@ -20,7 +20,7 @@ jobs:
   displayName: 'Build and publish to NuGet'
   pool:
     name: Azure Pipelines
-    vmImage: ubuntu-latest
+    vmImage: windows-latest
   steps:
   - checkout: self
   - checkout: ALMStuff
