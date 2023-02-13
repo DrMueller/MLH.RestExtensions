@@ -15,9 +15,13 @@ namespace Mmu.Mlh.RestExtensionsSimple.Areas.Services.Servants.Implementation
 
         public async Task<HttpCallResult<T>> AdaptResultAsync<T>(HttpResponseMessage response)
         {
-            var resultContent = await ReadResultContentAsync<T>(response);
+            var content = default(T);
+            if (response.IsSuccessStatusCode)
+            {
+                content = await ReadResultContentAsync<T>(response);
+            }
 
-            return new HttpCallResult<T>((int)response.StatusCode, response.ReasonPhrase, resultContent);
+            return new HttpCallResult<T>((int)response.StatusCode, response.ReasonPhrase, content);
         }
 
         private static async Task<T> ReadResultContentAsync<T>(HttpResponseMessage response)
