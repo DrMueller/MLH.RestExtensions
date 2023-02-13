@@ -19,7 +19,8 @@ jobs:
 - job: 'BuildAndPublishToNuGet'
   displayName: 'Build and publish to NuGet'
   pool:
-    name: 'Hosted VS2017'
+    name: Azure Pipelines
+    vmImage: ubuntu-latest
   steps:
   - checkout: self
   - checkout: ALMStuff
