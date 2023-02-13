@@ -19,8 +19,7 @@ jobs:
 - job: 'BuildAndPublishToNuGet'
   displayName: 'Build and publish to NuGet'
   pool:
-    name: Azure Pipelines
-    vmImage: windows-latest
+    vmImage: windows-2022
   steps:
   - checkout: self
   - checkout: ALMStuff
